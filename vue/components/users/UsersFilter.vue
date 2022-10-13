@@ -1,30 +1,30 @@
 <template>
-  <form @submit.prevent class="card border mb-4">
+  <form class="card border mb-4" @submit.prevent>
     <div class="card-body">
       <div class="row mb-3">
         <div class="col">
           <label for="created-from" class="form-label">Created at - from</label>
-          <input v-model="filter.createdfrom" id="created-from" type="date" class="form-control">
+          <input id="created-from" v-model="filter.createdfrom" type="date" class="form-control">
         </div>
         <div class="col">
           <label for="created-to" class="form-label">Created at - to</label>
-          <input v-model="filter.createdto" id="created-to" type="date" class="form-control">
+          <input id="created-to" v-model="filter.createdto" type="date" class="form-control">
         </div>
       </div>
       <div class="row mb-3">
         <div class="col">
           <label for="email" class="form-label">Email</label>
-          <input v-model="filter.email" id="email" type="text" class="form-control">
+          <input id="email" v-model="filter.email" type="text" class="form-control">
         </div>
         <div class="col">
           <label for="name" class="form-label">Name</label>
-          <input v-model="filter.name" id="name" type="text" class="form-control">
+          <input id="name" v-model="filter.name" type="text" class="form-control">
         </div>
       </div>
       <div class="row mb-3">
         <div class="col">
           <label for="status" class="form-label">Status</label>
-          <select v-model="filter.status" id="status" class="form-select">
+          <select id="status" v-model="filter.status" class="form-select">
             <option value="">Select the status</option>
             <option value="1">Enabled</option>
             <option value="0">Disabled</option>
@@ -32,7 +32,7 @@
         </div>
         <div class="col">
           <label for="role" class="form-label">Role</label>
-          <select v-model="filter.role" id="role" class="form-select">
+          <select id="role" v-model="filter.role" class="form-select">
             <option value="">Select the role</option>
             <option value="1">Librarian</option>
             <option value="0">Member</option>
@@ -41,14 +41,14 @@
       </div>
       <div class="d-flex justify-content-end gap-2">
         <button v-if="$store.state.users.load" class="btn btn-primary" type="button" disabled>
-          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
           <span>Loading...</span>
         </button>
-        <button v-else @click="filtered" class="btn btn-primary">
+        <button v-else class="btn btn-primary" @click="filtered">
           <i class="bi bi-search" />
           Search
         </button>
-        <button @click="reset" :disabled="$store.state.users.load" class="btn btn-outline-secondary">
+        <button :disabled="$store.state.users.load" class="btn btn-outline-secondary" @click="reset">
           <i class="bi bi-arrow-counterclockwise" />
           Reset
         </button>

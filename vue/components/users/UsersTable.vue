@@ -40,14 +40,14 @@
         <td><span class="badge" :class="status(user.status).class">{{ status(user.status).text }}</span></td>
         <td class="text-nowrap">{{ $moment(user.created_at).format("DD.MM.YY") }}</td>
         <td class="text-nowrap d-flex justify-content-center">
-          <nuxt-link :to="`/users/${user.id}`" class="link-primary px-2"><i class="bi bi-eye-fill"></i></nuxt-link>
-          <nuxt-link :to="`/users/${user.id}/edit`" class="link-primary px-2"><i class="bi bi-pencil-fill"></i></nuxt-link>
+          <nuxt-link :to="`/users/${user.id}`" class="link-primary px-2"><i class="bi bi-eye-fill" /></nuxt-link>
+          <nuxt-link :to="`/users/${user.id}/edit`" class="link-primary px-2"><i class="bi bi-pencil-fill" /></nuxt-link>
           <button
-            @click="$emit('delete', user.id)"
             type="button"
             class="link-danger bg-transparent border-0 px-2"
+            @click="$emit('delete', user.id)"
           >
-            <i class="bi bi-trash-fill"></i>
+            <i class="bi bi-trash-fill" />
           </button>
         </td>
       </tr>

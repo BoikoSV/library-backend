@@ -3,10 +3,10 @@
     <div class="row">
       <div class="col">
         <nuxt-link :to="`/books/${book?.id}/edit`" :disabled="!loaded" tag="button" class="btn btn-primary">
-          <i class="bi bi-pencil-fill"></i>
+          <i class="bi bi-pencil-fill" />
           Edit
         </nuxt-link>
-        <button @click="deleteBook" class="btn btn-primary" :disabled="!loaded">
+        <button class="btn btn-primary" :disabled="!loaded" @click="deleteBook">
           <i class="bi bi-trash-fill" />
           Delete
         </button>
@@ -33,7 +33,7 @@
         </div>
         <div class="d-flex gap-4 mb-5 fs-5">
           <div class="w-25 text-end">Status</div>
-          <div v-html="status(book.status)"></div>
+          <div v-html="status(book.status)" />
         </div>
         <div class="d-flex gap-4 mb-5 fs-5">
           <div class="w-25 text-end">Created at</div>
@@ -51,15 +51,15 @@
 <script>
 import moment from 'moment';
 export default {
-  name: "show", //eslint-disable-line
-  mounted () {
-    this.getBook();
-  },
+  name: 'Show',
   data () {
     return {
       book: null,
       loaded: false
     }
+  }, //eslint-disable-line
+  mounted () {
+    this.getBook();
   },
   methods: {
     status (statusId) {

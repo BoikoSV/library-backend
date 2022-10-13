@@ -12,7 +12,7 @@ module.exports = {
     '@nuxtjs',
     'plugin:nuxt/recommended'
   ],
-  ignorePatterns: ["plugins/cselect.js"],
+  ignorePatterns: ['plugins/cselect.js'],
   rules: {
     'vue/html-indent': 0,
     'vue/singleline-html-element-content-newline': 0,

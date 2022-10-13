@@ -31,16 +31,16 @@
         <td>{{ book.isbn }}</td>
         <td>{{ book.title }}</td>
         <td>{{ book.author }}</td>
-        <td v-html="status(book.status)" class="text-center"></td>
+        <td class="text-center" v-html="status(book.status)" />
         <td class="text-nowrap d-flex justify-content-center">
-          <nuxt-link :to="`/books/${book.id}`" class="link-primary px-2"><i class="bi bi-eye-fill"></i></nuxt-link>
-          <nuxt-link :to="`/books/${book.id}/edit`" class="link-primary px-2"><i class="bi bi-pencil-fill"></i></nuxt-link>
+          <nuxt-link :to="`/books/${book.id}`" class="link-primary px-2"><i class="bi bi-eye-fill" /></nuxt-link>
+          <nuxt-link :to="`/books/${book.id}/edit`" class="link-primary px-2"><i class="bi bi-pencil-fill" /></nuxt-link>
           <button
-            @click="$emit('delete', book.id)"
             type="button"
             class="link-danger bg-transparent border-0 px-2"
+            @click="$emit('delete', book.id)"
           >
-            <i class="bi bi-trash-fill"></i>
+            <i class="bi bi-trash-fill" />
           </button>
         </td>
       </tr>

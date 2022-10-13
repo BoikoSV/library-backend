@@ -3,10 +3,10 @@
     <div class="row">
       <div class="col">
         <nuxt-link :to="`/users/${user?.id}/edit`" :disabled="!loaded" tag="button" class="btn btn-primary">
-          <i class="bi bi-pencil-fill"></i>
+          <i class="bi bi-pencil-fill" />
           Edit
         </nuxt-link>
-        <button @click="deleteUser" class="btn btn-primary" :disabled="!loaded">
+        <button class="btn btn-primary" :disabled="!loaded" @click="deleteUser">
           <i class="bi bi-trash-fill" />
           Delete
         </button>
@@ -51,15 +51,15 @@
 <script>
 import moment from 'moment';
 export default {
-  name: "show", //eslint-disable-line
-  mounted () {
-    this.getUsers();
-  },
+  name: 'Show',
   data () {
     return {
       user: null,
       loaded: false
     }
+  }, //eslint-disable-line
+  mounted () {
+    this.getUsers();
   },
   methods: {
     role (roleId) {

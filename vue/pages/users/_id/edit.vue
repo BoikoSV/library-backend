@@ -2,71 +2,71 @@
   <AppPage title="Edit user" :sub-title="{name: 'Users', path: '/users'}">
     <div class="row">
       <div class="col-6">
-        <form @submit.prevent class="card border mb-4">
+        <form class="card border mb-4" @submit.prevent>
           <div class="card-body">
             <div class="row mb-3">
               <div class="mb-4">
                 <label for="email" class="form-label">Email</label>
                 <input
-                  :class="{ 'is-invalid': $v.user.email.$error, 'is-valid': !$v.user.email.$invalid }"
-                  v-model="user.email"
-                  @blur="$v.user.email.$touch"
                   id="email"
+                  v-model="user.email"
+                  :class="{ 'is-invalid': $v.user.email.$error, 'is-valid': !$v.user.email.$invalid }"
                   type="email"
                   class="form-control"
+                  @blur="$v.user.email.$touch"
                 >
-                <div class="invalid-feedback" v-if="$v.user.email.$error">{{ msgEmail }}</div>
+                <div v-if="$v.user.email.$error" class="invalid-feedback">{{ msgEmail }}</div>
               </div>
               <div class="mb-4">
                 <label for="name" class="form-label">Name</label>
                 <input
-                  :class="{ 'is-invalid': $v.user.name.$error, 'is-valid': !$v.user.name.$invalid }"
-                  v-model="user.name"
-                  @blur="$v.user.name.$touch"
                   id="name"
+                  v-model="user.name"
+                  :class="{ 'is-invalid': $v.user.name.$error, 'is-valid': !$v.user.name.$invalid }"
                   type="text"
                   class="form-control"
+                  @blur="$v.user.name.$touch"
                 >
-                <div class="invalid-feedback" v-if="$v.user.name.$error">{{ msgName }}</div>
+                <div v-if="$v.user.name.$error" class="invalid-feedback">{{ msgName }}</div>
               </div>
               <div class="mb-4">
                 <label for="role" class="form-label">Role</label>
                 <select
-                  name="role"
                   id="role"
+                  v-model="user.role"
+                  name="role"
                   class="form-control"
                   :class="{ 'is-invalid': $v.user.role.$error, 'is-valid': !$v.user.role.$invalid }"
-                  v-model="user.role"
                   @change="$v.user.role.$touch"
                 >
                   <option value="0">Member</option>
                   <option value="1">Librarian</option>
                 </select>
-                <div class="invalid-feedback" v-if="$v.user.role.$error">{{ msgRole }}</div>
+                <div v-if="$v.user.role.$error" class="invalid-feedback">{{ msgRole }}</div>
               </div>
               <div class="mb-4">
                 <label for="role" class="form-label">Status</label>
                 <select
-                  name="status"
                   id="status"
+                  v-model.number="user.status"
+                  name="status"
                   class="form-control"
                   :class="{ 'is-invalid': $v.user.status.$error, 'is-valid': !$v.user.status.$invalid }"
-                  v-model.number="user.status"
                   @change="$v.user.status.$touch"
                 >
                   <option value="0">Disabled</option>
                   <option value="1">Enabled</option>
                 </select>
-                <div class="invalid-feedback" v-if="$v.user.status.$error">{{ msgStatus }}</div>
+                <div v-if="$v.user.status.$error" class="invalid-feedback">{{ msgStatus }}</div>
               </div>
             </div>
             <div class="d-flex justify-content-end gap-2">
               <button v-if="false" class="btn btn-primary" type="button" disabled>
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
                 <span>Loading...</span>
               </button>
-              <button @click="updateUser" v-else class="btn btn-primary">
-                <i class="bi bi-check-circle"></i>
+              <button v-else class="btn btn-primary" @click="updateUser">
+                <i class="bi bi-check-circle" />
                 Save
               </button>
             </div>
@@ -74,8 +74,7 @@
         </form>
       </div>
     </div>
-
-  </AppPage>
+</AppPage>
 </template>
 
 <script>
@@ -105,14 +104,6 @@ export default {
       name: { required, minLength: minLength(5), maxLength: maxLength(250) },
       role: { required },
       status: { required }
-    }
-  },
-  methods: {
-    updateUser () {
-      this.$v.$touch();
-      if (!this.$v.$error) {
-        this.$store.dispatch('users/updateUser', this.user)
-      }
     }
   },
   computed: {
@@ -152,6 +143,14 @@ export default {
         message = 'The field Status is required'
       }
       return message;
+    }
+  },
+  methods: {
+    updateUser () {
+      this.$v.$touch();
+      if (!this.$v.$error) {
+        this.$store.dispatch('users/updateUser', this.user)
+      }
     }
   }
 }

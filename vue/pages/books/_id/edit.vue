@@ -2,49 +2,49 @@
   <AppPage title="Edit book" :sub-title="{name: 'Books', path: '/books'}">
     <div class="row">
       <div class="col-6">
-        <form @submit.prevent class="card border mb-4">
+        <form class="card border mb-4" @submit.prevent>
           <div class="card-body">
             <div class="row mb-3">
               <div class="mb-4">
                 <label for="isbn" class="form-label">ISBN</label>
                 <input
+                  id="isbn"
+                  v-model="book.isbn"
                   disabled
                   :class="{ 'is-invalid': $v.book.isbn.$error, 'is-valid': !$v.book.isbn.$invalid }"
-                  v-model="book.isbn"
-                  @blur="$v.book.isbn.$touch"
-                  id="isbn"
                   type="text"
                   class="form-control"
+                  @blur="$v.book.isbn.$touch"
                 >
-                <div class="invalid-feedback" v-if="$v.book.isbn.$error">{{ msgIsbn }}</div>
+                <div v-if="$v.book.isbn.$error" class="invalid-feedback">{{ msgIsbn }}</div>
               </div>
               <div class="mb-4">
                 <label for="title" class="form-label">Title</label>
                 <input
-                  :class="{ 'is-invalid': $v.book.title.$error, 'is-valid': !$v.book.title.$invalid }"
-                  v-model="book.title"
-                  @blur="$v.book.title.$touch"
                   id="title"
+                  v-model="book.title"
+                  :class="{ 'is-invalid': $v.book.title.$error, 'is-valid': !$v.book.title.$invalid }"
                   type="text"
                   class="form-control"
+                  @blur="$v.book.title.$touch"
                 >
-                <div class="invalid-feedback" v-if="$v.book.title.$error">{{ msgTitle }}</div>
+                <div v-if="$v.book.title.$error" class="invalid-feedback">{{ msgTitle }}</div>
               </div>
               <div class="mb-4">
                 <label for="author" class="form-label">Author</label>
                 <input
-                  :class="{ 'is-invalid': $v.book.author.$error, 'is-valid': !$v.book.author.$invalid }"
-                  v-model="book.author"
-                  @blur="$v.book.author.$touch"
                   id="author"
+                  v-model="book.author"
+                  :class="{ 'is-invalid': $v.book.author.$error, 'is-valid': !$v.book.author.$invalid }"
                   type="text"
                   class="form-control"
+                  @blur="$v.book.author.$touch"
                 >
-                <div class="invalid-feedback" v-if="$v.book.author.$error">{{ msgAuthor }}</div>
+                <div v-if="$v.book.author.$error" class="invalid-feedback">{{ msgAuthor }}</div>
               </div>
               <div class="mb-4">
                 <label for="status" class="form-label">Status</label>
-                <select v-model="book.status" name="status" id="status" class="form-control">
+                <select id="status" v-model="book.status" name="status" class="form-control">
                   <option value="0">Unavailable</option>
                   <option value="1">Available</option>
                 </select>
@@ -52,11 +52,11 @@
             </div>
             <div class="d-flex justify-content-end gap-2">
               <button v-if="false" class="btn btn-primary" type="button" disabled>
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
                 <span>Loading...</span>
               </button>
-              <button @click="updateBook" v-else class="btn btn-primary">
-                <i class="bi bi-check-circle"></i>
+              <button v-else class="btn btn-primary" @click="updateBook">
+                <i class="bi bi-check-circle" />
                 Save
               </button>
             </div>
@@ -64,8 +64,7 @@
         </form>
       </div>
     </div>
-
-  </AppPage>
+</AppPage>
 </template>
 
 <script>
@@ -95,14 +94,6 @@ export default {
       isbn: { required, numeric, minLength: minLength(13), maxLength: maxLength(13) },
       title: { required, minLength: minLength(5), maxLength: maxLength(250) },
       author: { required, minLength: minLength(5), maxLength: maxLength(250) }
-    }
-  },
-  methods: {
-    updateBook () {
-      this.$v.$touch();
-      if (!this.$v.$error) {
-        this.$store.dispatch('books/updateBook', this.book)
-      }
     }
   },
   computed: {
@@ -144,6 +135,14 @@ export default {
         message = 'The field must be max 200 symbols'
       }
       return message;
+    }
+  },
+  methods: {
+    updateBook () {
+      this.$v.$touch();
+      if (!this.$v.$error) {
+        this.$store.dispatch('books/updateBook', this.book)
+      }
     }
   }
 }

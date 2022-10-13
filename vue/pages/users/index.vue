@@ -23,7 +23,7 @@
     <UsersFilter @filter="filter" @reset="reset" />
 
     <!--  Table  -->
-    <UsersTable @delete="deleteUser" :users="users" :load="$store.state.users.load" />
+    <UsersTable :users="users" :load="$store.state.users.load" @delete="deleteUser" />
 
     <div class="d-flex justify-content-end">
       <AppPaginator
@@ -33,7 +33,6 @@
         @changePage="changePage"
       />
     </div>
-
 </AppPage>
 </template>
 
@@ -42,18 +41,18 @@ import UsersTable from '@/components/users/UsersTable';
 import UsersFilter from '@/components/users/UsersFilter';
 export default {
   name: "index", //eslint-disable-line
-  components: { UsersFilter, UsersTable }, //eslint-disable-line
+  components: { UsersFilter, UsersTable },
+  computed: {
+    users () {
+      return this.$store.state.users.users;
+    }
+  }, //eslint-disable-line
   mounted () {
     this.$store.commit('users/setPage', 1)
     this.$store.dispatch('users/fetchUsers')
   },
   beforeDestroy () {
     this.$store.commit('users/setPage', 1)
-  },
-  computed: {
-    users () {
-      return this.$store.state.users.users;
-    }
   },
   methods: {
     changePage (e) {

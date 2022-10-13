@@ -13,8 +13,7 @@
       page-link-class="page-link"
       prev-link-class="page-link"
       next-link-class="page-link"
-    >
-    </paginate>
+    />
   </nav>
 </template>
 

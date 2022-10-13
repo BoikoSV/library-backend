@@ -24,7 +24,7 @@
 
     <!--  Table  -->
 
-    <BooksTable @delete="deleteBook" :books="books" :load="$store.state.books.load" />
+    <BooksTable :books="books" :load="$store.state.books.load" @delete="deleteBook" />
 
     <div class="d-flex justify-content-end">
       <AppPaginator
@@ -45,6 +45,11 @@ import BooksFilter from '@/components/books/BooksFilter';
 export default {
   name: 'Index', //eslint-disable-line
   components: { AppPaginator, BooksTable, BooksFilter },
+  computed: {
+    books () {
+      return this.$store.state.books.books;
+    }
+  },
   mounted () {
     this.$store.commit('books/setPage', 1)
     this.$store.dispatch('books/fetchBooks')
@@ -52,11 +57,6 @@ export default {
   beforeDestroy () {
     this.$store.commit('books/setPage', 1)
     this.$store.commit('books/setFilter', {})
-  },
-  computed: {
-    books () {
-      return this.$store.state.books.books;
-    }
   },
   methods: {
     changePage (e) {

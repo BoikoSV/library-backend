@@ -24,7 +24,7 @@
 
 <!--  Table  -->
 
-    <LoansTable @delete="deleteLoan" :loans="loans" :load="$store.state.loans.load" />
+    <LoansTable :loans="loans" :load="$store.state.loans.load" @delete="deleteLoan" />
 
     <div class="d-flex justify-content-end">
       <AppPaginator
@@ -44,17 +44,17 @@ import LoansFilter from '@/components/loans/LoansFilter'
 export default {
   name: 'index', //eslint-disable-line
   components: { AppPage, LoansTable, LoansFilter },
+  computed: {
+    loans () {
+      return this.$store.state.loans.loans;
+    }
+  },
   mounted () {
     this.$store.dispatch('loans/fetchLoans')
   },
   beforeDestroy () {
     this.$store.commit('loans/setPage', 1)
     this.$store.commit('loans/setFilter', {})
-  },
-  computed: {
-    loans () {
-      return this.$store.state.loans.loans;
-    }
   },
   methods: {
     changePage (e) {

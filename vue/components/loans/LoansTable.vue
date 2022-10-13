@@ -29,14 +29,16 @@
         <td class="text-nowrap">{{ $moment(loan.created_at).format("DD.MM.YY") }}</td>
         <td class="text-nowrap fs-6">{{ $moment(loan.due_date).format("DD.MM.YY") }}</td>
         <td class="text-nowrap d-flex justify-content-center">
-          <nuxt-link :to="`/loans/${loan.id}`" class="link-primary px-2"><i class="bi bi-eye-fill"></i></nuxt-link>
-          <nuxt-link :to="`/loans/${loan.id}/edit`" class="link-primary px-2"><i class="bi bi-pencil-fill"></i></nuxt-link>
+          <nuxt-link :to="`/loans/${loan.id}`" class="link-primary px-2">
+            <i class="bi bi-eye-fill" />
+          </nuxt-link>
+          <nuxt-link :to="`/loans/${loan.id}/edit`" class="link-primary px-2"><i class="bi bi-pencil-fill" /></nuxt-link>
           <button
-            @click="$emit('delete', loan.id)"
-            type="button"
             class="link-danger bg-transparent border-0 px-2"
+            type="button"
+            @click="$emit('delete', loan.id)"
           >
-            <i class="bi bi-trash-fill"></i>
+            <i class="bi bi-trash-fill" />
           </button>
         </td>
       </tr>

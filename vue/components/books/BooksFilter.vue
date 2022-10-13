@@ -1,24 +1,24 @@
 <template>
-  <form @submit.prevent class="card border mb-4">
+  <form class="card border mb-4" @submit.prevent>
     <div class="card-body">
       <div class="row mb-3">
         <div class="col">
           <label for="isbn" class="form-label">ISBN</label>
-          <input v-model="filter.isbn" id="isbn" type="text" class="form-control">
+          <input id="isbn" v-model="filter.isbn" type="text" class="form-control">
         </div>
         <div class="col">
           <label for="title" class="form-label">Title</label>
-          <input v-model="filter.title" id="title" type="text" class="form-control">
+          <input id="title" v-model="filter.title" type="text" class="form-control">
         </div>
       </div>
       <div class="row mb-3">
         <div class="col">
           <label for="author" class="form-label">Author</label>
-          <input v-model="filter.author" id="author" type="text" class="form-control">
+          <input id="author" v-model="filter.author" type="text" class="form-control">
         </div>
         <div class="col">
           <label for="status" class="form-label">Status</label>
-          <select v-model="filter.status" id="status" class="form-select">
+          <select id="status" v-model="filter.status" class="form-select">
             <option value="">Select the status</option>
             <option value="0">Unavailable</option>
             <option value="1">Available</option>
@@ -27,14 +27,14 @@
       </div>
       <div class="d-flex justify-content-end gap-2">
         <button v-if="$store.state.books.load" class="btn btn-primary" type="button" disabled>
-          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
           <span>Loading...</span>
         </button>
-        <button v-else @click="filtered" class="btn btn-primary">
+        <button v-else class="btn btn-primary" @click="filtered">
           <i class="bi bi-search" />
           Search
         </button>
-        <button @click="reset" :disabled="$store.state.books.load" class="btn btn-outline-secondary">
+        <button :disabled="$store.state.books.load" class="btn btn-outline-secondary" @click="reset">
           <i class="bi bi-arrow-counterclockwise" />
           Reset
         </button>

@@ -2,66 +2,66 @@
   <AppPage title="New loan" :sub-title="{name: 'Loans', path: '/loans'}">
     <div class="row">
       <div class="col-6">
-        <form @submit.prevent class="card border mb-4">
+        <form class="card border mb-4" @submit.prevent>
           <div class="card-body">
             <div class="row mb-3">
               <div class="mb-4">
                 <label for="book" class="form-label">Book</label>
                 <select
-                  name="book"
                   id="book"
-                  :class="{ 'is-invalid': $v.book.$error, 'is-valid': !$v.book.$invalid }"
                   v-model="book"
-                  @change="$v.book.$touch"
+                  name="book"
+                  :class="{ 'is-invalid': $v.book.$error, 'is-valid': !$v.book.$invalid }"
                   class="form-control custom-select"
+                  @change="$v.book.$touch"
                 >
                   <option value selected>Select a book</option>
                   <option v-for="book in books" :key="book.id" :value="book.id">{{ book.title }}</option>
                 </select>
-                <div class="invalid-feedback" v-if="$v.book.$error">{{ msgBook }}</div>
+                <div v-if="$v.book.$error" class="invalid-feedback">{{ msgBook }}</div>
               </div>
               <div class="mb-4">
                 <label for="member" class="form-label">Member</label>
                 <select
-                  name="member"
                   id="member"
-                  :class="{ 'is-invalid': $v.member.$error, 'is-valid': !$v.member.$invalid }"
                   v-model="member"
-                  @change="$v.member.$touch"
+                  name="member"
+                  :class="{ 'is-invalid': $v.member.$error, 'is-valid': !$v.member.$invalid }"
                   class="form-control custom-select"
+                  @change="$v.member.$touch"
                 >
                   <option value selected>Select a member</option>
                   <option v-for="member in members" :key="member.id" :value="member.id">{{ member.name }}</option>
                 </select>
-                <div class="invalid-feedback" v-if="$v.member.$error">{{ msgMember }}</div>
+                <div v-if="$v.member.$error" class="invalid-feedback">{{ msgMember }}</div>
               </div>
               <div class="mb-4">
                 <div class="col">
                   <label for="created-from" class="form-label">Date to</label>
                   <input
+                    id="created-from"
                     v-model="date"
                     :class="{ 'is-invalid': $v.date.$error, 'is-valid': !$v.date.$invalid }"
-                    @change="$v.date.$touch"
-                    id="created-from"
                     type="date"
                     class="form-control"
+                    @change="$v.date.$touch"
                   >
                 </div>
-                <div class="invalid-feedback" v-if="$v.date.$error">{{ msgDate }}</div>
+                <div v-if="$v.date.$error" class="invalid-feedback">{{ msgDate }}</div>
               </div>
             </div>
 
             <div class="d-flex justify-content-end gap-2">
               <button v-if="false" class="btn btn-primary" type="button" disabled>
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
                 <span>Loading...</span>
               </button>
-              <button @click="addLoan" v-else class="btn btn-primary">
-                <i class="bi bi-plus-lg"/>
+              <button v-else class="btn btn-primary" @click="addLoan">
+                <i class="bi bi-plus-lg" />
                 Add loan
               </button>
-              <button @click="reset" class="btn btn-outline-secondary">
-                <i class="bi bi-arrow-counterclockwise"/>
+              <button class="btn btn-outline-secondary" @click="reset">
+                <i class="bi bi-arrow-counterclockwise" />
                 Reset
               </button>
             </div>
@@ -69,8 +69,7 @@
         </form>
       </div>
     </div>
-
-  </AppPage>
+</AppPage>
 </template>
 
 <script>
@@ -98,25 +97,6 @@ export default {
     member: { required },
     date: { required }
   },
-  methods: {
-    addLoan () {
-      this.$v.$touch();
-      if (!this.$v.$error) {
-        const loan = {
-          book_id: this.book,
-          user_id: this.member,
-          due_date: this.date
-        }
-        this.$store.dispatch('loans/addLoan', loan)
-      }
-    },
-    reset () {
-      this.book = ''
-      this.member = ''
-      this.date = ''
-      this.$v.$reset();
-    }
-  },
   computed: {
     msgBook () {
       let message = '';
@@ -138,6 +118,25 @@ export default {
         message = 'You must select a date'
       }
       return message;
+    }
+  },
+  methods: {
+    addLoan () {
+      this.$v.$touch();
+      if (!this.$v.$error) {
+        const loan = {
+          book_id: this.book,
+          user_id: this.member,
+          due_date: this.date
+        }
+        this.$store.dispatch('loans/addLoan', loan)
+      }
+    },
+    reset () {
+      this.book = ''
+      this.member = ''
+      this.date = ''
+      this.$v.$reset();
     }
   }
 }
