@@ -33,7 +33,14 @@
       </thead>
       <tbody>
       <tr v-for="user in users" :key="user.id">
-        <td>avatar img</td>
+        <td class="d-flex">
+          <div v-if="false" class="d-flex m-auto">
+            <img style="width: 3rem;height: 3rem;object-fit: contain;" src="https://damion.club/uploads/posts/2022-02/thumbs/1645233010_4-damion-club-p-krasivaya-priroda-utrom-priroda-4.jpg" alt="" class="m-auto">
+          </div>
+          <div v-else class="bg-light d-flex rounded-circle" style="width: 3rem;height: 3rem;">
+            <i class="bi bi-person-fill m-auto fs-4 text-muted" />
+          </div>
+        </td>
         <td>{{ user.email }}</td>
         <td class="text-nowrap">{{ user.name }}</td>
         <td>{{ role(user.role) }}</td>

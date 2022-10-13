@@ -27,21 +27,30 @@
       </thead>
       <tbody>
       <tr v-for="book in books" :key="book.id">
-        <td>Image</td>
+        <td class="d-flex">
+          <div v-if="true" class="d-flex m-auto">
+            <img style="width: 3rem;height: 3rem;object-fit: contain;" src="https://damion.club/uploads/posts/2022-02/thumbs/1645233010_4-damion-club-p-krasivaya-priroda-utrom-priroda-4.jpg" alt="" class="m-auto">
+          </div>
+          <div v-else class="bg-light d-flex rounded-circle" style="width: 3rem;height: 3rem;">
+            <i class="bi bi-book-fill m-auto fs-4 text-muted" />
+          </div>
+        </td>
         <td>{{ book.isbn }}</td>
         <td>{{ book.title }}</td>
         <td>{{ book.author }}</td>
         <td class="text-center" v-html="status(book.status)" />
-        <td class="text-nowrap d-flex justify-content-center">
-          <nuxt-link :to="`/books/${book.id}`" class="link-primary px-2"><i class="bi bi-eye-fill" /></nuxt-link>
-          <nuxt-link :to="`/books/${book.id}/edit`" class="link-primary px-2"><i class="bi bi-pencil-fill" /></nuxt-link>
-          <button
-            type="button"
-            class="link-danger bg-transparent border-0 px-2"
-            @click="$emit('delete', book.id)"
-          >
-            <i class="bi bi-trash-fill" />
-          </button>
+        <td class="text-nowrap">
+          <div class="d-flex justify-content-center align-items-center">
+            <nuxt-link :to="`/books/${book.id}`" class="link-primary px-2"><i class="bi bi-eye-fill" /></nuxt-link>
+            <nuxt-link :to="`/books/${book.id}/edit`" class="link-primary px-2"><i class="bi bi-pencil-fill" /></nuxt-link>
+            <button
+              type="button"
+              class="link-danger bg-transparent border-0 px-2"
+              @click="$emit('delete', book.id)"
+            >
+              <i class="bi bi-trash-fill" />
+            </button>
+          </div>
         </td>
       </tr>
       </tbody>
