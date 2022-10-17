@@ -32,13 +32,20 @@ export default {
     })
   },
   addBook({}, book) { //eslint-disable-line
-    this.$axios.post('http://localhost:8000/api/books', book)
+    const formData = new FormData();
+    if (book.image) {
+      formData.append('image', book.image)
+    }
+    formData.append('isbn', book.isbn)
+    formData.append('title', book.title)
+    formData.append('author', book.author)
+    const headers = { 'Content-Type': 'multipart/form-data' }
+    this.$axios.post('http://localhost:8000/api/books', formData, { headers })
       .then((res) => {
         this.$router.push('/books')
       })
   },
   updateBook({}, book) { //eslint-disable-line
-    console.log(book)
     this.$axios.patch(`http://localhost:8000/api/books/${book.id}`, book)
       .then((res) => {
         this.$router.push('/books')

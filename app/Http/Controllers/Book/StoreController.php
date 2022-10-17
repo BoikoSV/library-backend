@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Book\StoreRequest;
 use App\Models\Book;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class StoreController extends Controller
 {
@@ -18,7 +19,13 @@ class StoreController extends Controller
     public function __invoke(StoreRequest $request)
     {
         $request->validated();
-        $book = Book::create($request->all());
+        $book = $request->all();
+        if ($request->hasFile('image')){
+            $book['image'] = '';
+            $image = $request->file('image')->store('images/books', 'public');
+            $book['image'] = $image;
+        }
+        $book = Book::create($book);
         return new JsonResource($book);
     }
 }

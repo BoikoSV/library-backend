@@ -26,7 +26,8 @@ class StoreRequest extends FormRequest
         return [
             'title' => 'required|min:5|max:250',
             'author' => 'required|min:5|max:200',
-            'isbn' => 'required|digits:13|unique:books'
+            'isbn' => 'required|digits:13|unique:books',
+            'image' => 'image'
         ];
     }
 }

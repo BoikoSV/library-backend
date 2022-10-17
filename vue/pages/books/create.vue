@@ -41,6 +41,16 @@
                 >
                 <div v-if="$v.book.author.$error" class="invalid-feedback">{{ msgAuthor }}</div>
               </div>
+              <div class="mb-4">
+                <label for="image" class="form-label">Image</label>
+                <input
+                  id="image"
+                  @change="uploadFile"
+                  type="file"
+                  ref="image"
+                  class="form-control"
+                >
+              </div>
             </div>
 
             <div class="d-flex justify-content-end gap-2">
@@ -73,7 +83,8 @@ export default {
       book: {
         isbn: '',
         title: '',
-        author: ''
+        author: '',
+        image: ''
       }
     }
   },
@@ -126,6 +137,9 @@ export default {
     }
   },
   methods: {
+    uploadFile () {
+      this.book.image = this.$refs.image.files[0]
+    },
     addBook () {
       this.$v.$touch();
       if (!this.$v.$error) {
@@ -136,6 +150,7 @@ export default {
       this.book.isbn = ''
       this.book.title = ''
       this.book.author = ''
+      this.book.image = ''
       this.$v.$reset();
     }
   }
