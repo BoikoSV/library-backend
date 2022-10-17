@@ -31,6 +31,12 @@
           <div class="w-25 text-end">Author</div>
           <div class="fw-bolder">{{ book.author }}</div>
         </div>
+        <div v-if="book.image" class="d-flex gap-4 mb-5 fs-5">
+          <div class="w-25 text-end">Image</div>
+          <div class="fw-bolder w-25">
+            <img class="d-block w-100" :src="`http://localhost:8000/storage/${book.image}`" :alt="book.title">
+          </div>
+        </div>
         <div class="d-flex gap-4 mb-5 fs-5">
           <div class="w-25 text-end">Status</div>
           <div v-html="status(book.status)" />
@@ -51,7 +57,7 @@
 <script>
 import moment from 'moment';
 export default {
-  name: 'Show',
+  name: 'Show', //eslint-disable-line
   data () {
     return {
       book: null,

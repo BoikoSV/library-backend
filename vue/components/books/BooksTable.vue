@@ -27,9 +27,9 @@
       </thead>
       <tbody>
       <tr v-for="book in books" :key="book.id">
-        <td class="d-flex">
-          <div v-if="true" class="d-flex m-auto">
-            <img style="width: 3rem;height: 3rem;object-fit: contain;" src="https://damion.club/uploads/posts/2022-02/thumbs/1645233010_4-damion-club-p-krasivaya-priroda-utrom-priroda-4.jpg" alt="" class="m-auto">
+        <td class="d-flex d-flex justify-content-center align-items-center">
+          <div v-if="book.image" class="d-flex m-auto">
+            <img style="width: 3rem;height: 3rem;object-fit: contain;" :src="`http://localhost:8000/storage/${book.image}`" alt="" class="m-auto">
           </div>
           <div v-else class="bg-light d-flex rounded-circle" style="width: 3rem;height: 3rem;">
             <i class="bi bi-book-fill m-auto fs-4 text-muted" />
