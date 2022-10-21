@@ -19,7 +19,7 @@ class IndexController extends Controller
     public function __invoke(BookFilters $filters, Request $request)
     {
         if($request->has('page')){
-            $books =  Book::filter($filters)->paginate();
+            $books =  Book::filter($filters)->orderBy('created_at', 'desc')->paginate();
         }else{
             $books = Book::all();
         }

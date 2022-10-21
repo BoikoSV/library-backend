@@ -18,7 +18,7 @@ class IndexController extends Controller
      */
     public function __invoke(LoanFilters $filters)
     {
-        $loans = Loan::filter($filters)->paginate(10);
+        $loans = Loan::filter($filters)->orderBy('loans.created_at', 'desc')->paginate(10);
         return JsonResource::collection($loans);
     }
 }

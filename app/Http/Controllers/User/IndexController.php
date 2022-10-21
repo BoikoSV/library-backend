@@ -19,7 +19,7 @@ class IndexController extends Controller
     public function __invoke(UserFilters $filters, Request $request)
     {
         if ($request->has('page')){
-            $users =  User::filter($filters)->paginate();
+            $users =  User::filter($filters)->orderBy('created_at', 'desc')->paginate();
         }else{
             $users = User::all();
         }
