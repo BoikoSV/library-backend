@@ -16,7 +16,6 @@ class UpdateController extends Controller
      */
     public function __invoke(Loan $loan, UpdateRequest $request)
     {
-        $request->validated();
         $loan = $loan->update($request->all());
         return $loan;
     }

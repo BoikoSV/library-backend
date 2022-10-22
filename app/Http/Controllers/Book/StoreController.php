@@ -18,14 +18,7 @@ class StoreController extends Controller
      */
     public function __invoke(StoreRequest $request)
     {
-        $request->validated();
-        $book = $request->all();
-        if ($request->hasFile('image')){
-            $book['image'] = '';
-            $image = $request->file('image')->store('images/books', 'public');
-            $book['image'] = $image;
-        }
-        $book = Book::create($book);
+        $book = Book::create($request->all());
         return new JsonResource($book);
     }
 }

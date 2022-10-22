@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreRequest;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
 class StoreController extends Controller
 {
@@ -17,10 +18,17 @@ class StoreController extends Controller
      */
     public function __invoke(StoreRequest $request)
     {
-        $request->validated();
-        $userData = $request->all();
-        $userData['password'] = 'Random password';
-        $user = User::firstOrCreate(['email' => $userData['email']], $userData);
+        try {
+            DB::beginTransaction();
+            $userData = $request->all();
+            $userData['password'] = 'Random password';
+            $user = User::firstOrCreate(['email' => $userData['email']], $userData);
+            DB::commit();
+        }catch (\Exception $e){
+            abort('500', 'Server error');
+            DB::rollBack();
+        }
+
         return new JsonResource($user);
     }
 }

@@ -17,7 +17,6 @@ class StoreController extends Controller
      */
     public function __invoke(StoreRequest $request)
     {
-        $request->validated();
         $loan = Loan::create($request->all());
         return new JsonResource($loan);
     }

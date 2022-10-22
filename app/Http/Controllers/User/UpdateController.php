@@ -17,7 +17,6 @@ class UpdateController extends Controller
      */
     public function __invoke(User $user, UpdateRequest $request)
     {
-        $request->validated();
         $user = $user->update($request->all());
         return $user;
     }
